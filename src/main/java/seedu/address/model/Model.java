@@ -58,8 +58,8 @@ public interface Model {
     boolean hasPerson(Patient patient);
 
     /**
-     * Deletes the given Patient.
-     * The Patient must exist in the address book.
+     * Deletes the given patient.
+     * The patient must exist in the address book.
      */
     void deletePerson(Patient target);
 
@@ -70,17 +70,18 @@ public interface Model {
     void addPerson(Patient patient);
 
     /**
-     * Replaces the given Patient {@code target} with {@code editedPatient}.
+     * Replaces the given patient {@code target} with {@code editedPatient}.
      * {@code target} must exist in the address book.
-     * The Patient identity of {@code editedPatient} must not be the same as another existing Patient in the address book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the
+     * address book.
      */
     void setPerson(Patient target, Patient editedPatient);
 
-    /** Returns an unmodifiable view of the filtered Patient list */
+    /** Returns an unmodifiable view of the filtered patient list */
     ObservableList<Patient> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered Patient list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Patient> predicate);

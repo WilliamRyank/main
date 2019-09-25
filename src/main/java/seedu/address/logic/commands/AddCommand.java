@@ -11,13 +11,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Patient;
 
 /**
- * Adds a Patient to the address book.
+ * Adds a patient to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Patient to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -30,13 +30,13 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New Patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This Patient already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book";
 
     private final Patient toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Patient}
+     * Creates an AddCommand to add the specified {@code patient}
      */
     public AddCommand(Patient patient) {
         requireNonNull(patient);

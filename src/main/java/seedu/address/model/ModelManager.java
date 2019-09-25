@@ -112,10 +112,10 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPatient);
     }
 
-    //=========== Filtered Patient List Accessors =============================================================
+    //=========== Filtered patient List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code patient} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override

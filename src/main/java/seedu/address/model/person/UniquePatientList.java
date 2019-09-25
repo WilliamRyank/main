@@ -13,23 +13,24 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A Patient is considered unique by comparing using {@code Patient#isSamePerson(Patient)}. As such, adding and updating of
- * persons uses Patient#isSamePerson(Patient) for equality so as to ensure that the Patient being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a Patient uses Patient#equals(Object) so
- * as to ensure that the Patient with exactly the same fields will be removed.
+ * A patient is considered unique by comparing using {@code patient#isSamePerson(patient)}.
+ * As such, adding and updating of persons uses patient#isSamePerson(patient) for equality so as to ensure that
+ * the patient being added or updated is unique in terms of identity in the UniquePatientList.
+ * However, the removal of a patient uses patient#equals(Object) so as to ensure that the patient
+ * with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Patient#isSamePerson(Patient)
  */
-public class UniquePersonList implements Iterable<Patient> {
+public class UniquePatientList implements Iterable<Patient> {
 
     private final ObservableList<Patient> internalList = FXCollections.observableArrayList();
     private final ObservableList<Patient> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent Patient as the given argument.
+     * Returns true if the list contains an equivalent patient as the given argument.
      */
     public boolean contains(Patient toCheck) {
         requireNonNull(toCheck);
@@ -37,8 +38,8 @@ public class UniquePersonList implements Iterable<Patient> {
     }
 
     /**
-     * Adds a Patient to the list.
-     * The Patient must not already exist in the list.
+     * Adds a patient to the list.
+     * The patient must not already exist in the list.
      */
     public void add(Patient toAdd) {
         requireNonNull(toAdd);
@@ -49,9 +50,9 @@ public class UniquePersonList implements Iterable<Patient> {
     }
 
     /**
-     * Replaces the Patient {@code target} in the list with {@code editedPatient}.
+     * Replaces the patient {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the list.
-     * The Patient identity of {@code editedPatient} must not be the same as another existing Patient in the list.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient in the list.
      */
     public void setPerson(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
@@ -69,8 +70,8 @@ public class UniquePersonList implements Iterable<Patient> {
     }
 
     /**
-     * Removes the equivalent Patient from the list.
-     * The Patient must exist in the list.
+     * Removes the equivalent patient from the list.
+     * The patient must exist in the list.
      */
     public void remove(Patient toRemove) {
         requireNonNull(toRemove);
@@ -79,7 +80,7 @@ public class UniquePersonList implements Iterable<Patient> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniquePatientList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -112,8 +113,8 @@ public class UniquePersonList implements Iterable<Patient> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniquePatientList // instanceof handles nulls
+                        && internalList.equals(((UniquePatientList) other).internalList));
     }
 
     @Override

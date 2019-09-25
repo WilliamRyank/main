@@ -70,7 +70,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different Patient -> returns false
+        // different patient -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -150,25 +150,25 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single Patient.
+     * A Model stub that contains a single patient.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Patient Patient;
+        private final Patient patient;
 
         ModelStubWithPerson(Patient patient) {
             requireNonNull(patient);
-            this.Patient = patient;
+            this.patient = patient;
         }
 
         @Override
         public boolean hasPerson(Patient patient) {
             requireNonNull(patient);
-            return this.Patient.isSamePerson(patient);
+            return this.patient.isSamePerson(patient);
         }
     }
 
     /**
-     * A Model stub that always accept the Patient being added.
+     * A Model stub that always accept the patient being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Patient> mPersonsAdded = new ArrayList<>();

@@ -34,7 +34,7 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different Patient -> returns false
+        // different patient -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

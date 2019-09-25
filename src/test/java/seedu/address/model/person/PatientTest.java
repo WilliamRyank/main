@@ -63,7 +63,7 @@ public class PatientTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different Patient -> returns false
+        // different patient -> returns false
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false

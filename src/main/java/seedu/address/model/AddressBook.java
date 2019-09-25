@@ -6,7 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Patient;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.UniquePatientList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +14,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePatientList persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniquePatientList();
     }
 
     public AddressBook() {}
@@ -40,7 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the Patient list with {@code patients}.
+     * Replaces the contents of the patient list with {@code patients}.
      * {@code patients} must not contain duplicate patients.
      */
     public void setPersons(List<Patient> patients) {
@@ -56,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
-    //// Patient-level operations
+    //// patient-level operations
 
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the address book.
@@ -67,17 +67,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a Patient to the address book.
-     * The Patient must not already exist in the address book.
+     * Adds a patient to the address book.
+     * The patient must not already exist in the address book.
      */
     public void addPerson(Patient p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given Patient {@code target} in the list with {@code editedPatient}.
+     * Replaces the given patient {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the address book.
-     * The Patient identity of {@code editedPatient} must not be the same as another existing Patient in the address book.
+     * The patient identity of {@code editedPatient} must not be the same as another existing patient
+     * in the address book.
      */
     public void setPerson(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);

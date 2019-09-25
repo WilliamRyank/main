@@ -13,7 +13,7 @@ import seedu.address.model.person.Patient;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Patient.
+ * A utility class for patient.
  */
 public class PersonUtil {
 

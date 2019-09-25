@@ -17,7 +17,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Patient;
 
 /**
- * A utility class containing a list of {@code Patient} objects to be used in tests.
+ * A utility class containing a list of {@code patient} objects to be used in tests.
  */
 public class TypicalPersons {
 
@@ -46,7 +46,7 @@ public class TypicalPersons {
     public static final Patient IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withAddress("chicago ave").build();
 
-    // Manually added - Patient's details found in {@code CommandTestUtil}
+    // Manually added - patient's details found in {@code CommandTestUtil}
     public static final Patient AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Patient BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)

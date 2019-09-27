@@ -1,8 +1,10 @@
 {
   "persons": [ {
+    "nric": "S1234567A",
     "name": "Valid Person",
     "phone": "9482424"
   }, {
+    "nric": "S1142317A",
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424"
   } ]

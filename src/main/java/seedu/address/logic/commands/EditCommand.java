@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -14,6 +15,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
@@ -28,6 +30,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "Example: " + COMMAND_WORD + " 1 "
@@ -80,10 +83,11 @@ public class EditCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
+        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
 
-        return new Person(updatedName, updatedPhone);
+        return new Person(updatedNric, updatedName, updatedPhone);
     }
 
     @Override
@@ -111,6 +115,7 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
+        private Nric nric;
 
         public EditPersonDescriptor() {}
 
@@ -119,6 +124,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setNric(toCopy.nric);
             setName(toCopy.name);
             setPhone(toCopy.phone);
         }
@@ -127,7 +133,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone);
+            return CollectionUtil.isAnyNonNull(name, phone, nric);
         }
 
         public void setName(Name name) {
@@ -146,6 +152,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(phone);
         }
 
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -162,7 +176,8 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone());
+                    && getPhone().equals(e.getPhone())
+                    && getNric().equals(e.getNric());
         }
     }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
@@ -17,12 +18,15 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
+    private final String nric;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone) {
+    public JsonAdaptedPerson(@JsonProperty("nric") String nric, @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone) {
+        this.nric = nric;
         this.name = name;
         this.phone = phone;
     }
@@ -31,6 +35,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        nric = source.getNric().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
     }
@@ -41,6 +46,14 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        if (nric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        }
+        if (!Nric.isValidNric(nric)) {
+            throw new IllegalValueException(Nric.MESSAGE_CONSTRAINTS);
+        }
+        final Nric modelNric = new Nric(nric);
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -57,7 +70,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        return new Person(modelName, modelPhone);
+        return new Person(modelNric, modelName, modelPhone);
     }
 
 }

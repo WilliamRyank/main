@@ -1,16 +1,13 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Patient;
+import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code patient}.
+ * An UI component that displays information of a {@code person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -24,7 +21,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Patient patient;
+    public final Person person;
 
     @FXML
     private HBox cardPane;
@@ -34,21 +31,13 @@ public class PersonCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private FlowPane tags;
 
-    public PersonCard(Patient patient, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
-        this.patient = patient;
+        this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(patient.getName().fullName);
-        phone.setText(patient.getPhone().value);
-        address.setText(patient.getAddress().value);
-        patient.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
     }
 
     @Override
@@ -66,6 +55,6 @@ public class PersonCard extends UiPart<Region> {
         // state check
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && patient.equals(card.patient);
+                && person.equals(card.person);
     }
 }

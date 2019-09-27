@@ -34,7 +34,7 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different patient -> returns false
+        // different person -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
@@ -69,7 +69,6 @@ public class NameContainsKeywordsPredicateTest {
 
         // Keywords match phone and address, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withAddress("Main Street").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").build()));
     }
 }

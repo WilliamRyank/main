@@ -4,6 +4,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Type;
 
 /**
  * A utility class to help with building person objects.
@@ -13,15 +14,18 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_NRIC = "S1111111A";
+    public static final String DEFAULT_TYPE = "doctor";
 
     private Name name;
     private Phone phone;
     private Nric nric;
+    private Type type;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         nric = new Nric(DEFAULT_NRIC);
+        type = new Type(DEFAULT_TYPE);
     }
 
     /**
@@ -31,6 +35,15 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         nric = personToCopy.getNric();
+        type = personToCopy.getType();
+    }
+
+    /**
+     * Sets the {@code Type} of the {@code person} that we are building.
+     */
+    public PersonBuilder withType(String type) {
+        this.type = new Type(type);
+        return this;
     }
 
     /**
@@ -58,7 +71,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(nric, name, phone);
+        return new Person(type, nric, name, phone);
     }
 
 }

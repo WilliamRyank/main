@@ -8,6 +8,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Type;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -19,13 +20,15 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String nric;
+    private final String type;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("nric") String nric, @JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone) {
+    public JsonAdaptedPerson(@JsonProperty("type") String type, @JsonProperty("nric") String nric,
+                             @JsonProperty("name") String name, @JsonProperty("phone") String phone) {
+        this.type = type;
         this.nric = nric;
         this.name = name;
         this.phone = phone;
@@ -35,6 +38,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        type = source.getType().value;
         nric = source.getNric().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
@@ -46,6 +50,14 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        if (type == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Type.class.getSimpleName()));
+        }
+        if (!Type.isValidType(type)) {
+            throw new IllegalValueException(Type.MESSAGE_CONSTRAINTS);
+        }
+        final Type modelType = new Type(type);
+
         if (nric == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
         }
@@ -70,7 +82,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
-        return new Person(modelNric, modelName, modelPhone);
+        return new Person(modelType, modelNric, modelName, modelPhone);
     }
 
 }

@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Person {
 
     // Identity fields
+    private final Type type;
     private final Nric nric;
     private final Name name;
     private final Phone phone;
@@ -18,11 +19,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Nric nric, Name name, Phone phone) {
-        requireAllNonNull(nric, name, phone);
+    public Person(Type type, Nric nric, Name name, Phone phone) {
+        requireAllNonNull(type, nric, name, phone);
+        this.type = type;
         this.nric = nric;
         this.name = name;
         this.phone = phone;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public Nric getNric() {
@@ -67,19 +73,22 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getNric().equals(getNric())
                 && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone());
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getType().equals(getType());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(nric, name, phone);
+        return Objects.hash(type, nric, name, phone);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Person Type: ")
+                .append(getType())
                 .append(" Nric: ")
                 .append(getNric())
                 .append(" Phone: ")

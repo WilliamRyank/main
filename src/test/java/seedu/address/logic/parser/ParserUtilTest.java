@@ -11,15 +11,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Type;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_NRIC = "G123A";
+    private static final String INVALID_TYPE = "student";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_NRIC = "S1111111A";
+    private static final String VALID_TYPE = "doctor";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -111,4 +114,28 @@ public class ParserUtilTest {
         Nric expectedNric = new Nric(VALID_NRIC);
         assertEquals(expectedNric, ParserUtil.parseNric(nricWithWhitespace));
     }
+
+    @Test
+    public void parseType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseType((String) null));
+    }
+
+    @Test
+    public void parseType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseType(INVALID_TYPE));
+    }
+
+    @Test
+    public void parseType_validValueWithoutWhitespace_returnsNric() throws Exception {
+        Type expectedType = new Type(VALID_TYPE);
+        assertEquals(expectedType, ParserUtil.parseType(VALID_TYPE));
+    }
+
+    @Test
+    public void parseType_validValueWithWhitespace_returnsTrimmedType() throws Exception {
+        String typeWithWhitespace = WHITESPACE + VALID_TYPE + WHITESPACE;
+        Type expectedType = new Type(VALID_TYPE);
+        assertEquals(expectedType, ParserUtil.parseType(typeWithWhitespace));
+    }
+
 }

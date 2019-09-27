@@ -5,6 +5,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Type;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -26,9 +27,18 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
+        descriptor.setType(person.getType());
         descriptor.setNric(person.getNric());
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
+    }
+
+    /**
+     * Sets the {@code Type} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withType(String type) {
+        descriptor.setType(new Type(type));
+        return this;
     }
 
     /**

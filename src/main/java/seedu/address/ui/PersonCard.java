@@ -33,6 +33,8 @@ public class PersonCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label nric;
+    @FXML
+    private Label type;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -41,6 +43,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         nric.setText(person.getNric().value);
+        type.setText(person.getType().value);
     }
 
     @Override

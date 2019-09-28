@@ -1,4 +1,4 @@
-= AddressBook Level 3 - User Guide
+= ORGANice Transplant Manager - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,32 +12,33 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S1-CS2103T-T13-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2013T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 3 (AB3) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB3 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+ORGANice Transplant Manager(OTM) is a desktop application for hospital administration staff +
+to easily manage kidney transplants.
+With OTM, you can organise information about patients, doctors, and kidney donors, +
+and find matches between organ donors and patients.
+
+OTM is *optimized for those who prefer to work with a Command Line Interface* (CLI) +
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, +
+OTM can get your administration tasks done faster than traditional GUI apps. Interested? +
+Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `organice.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your jar file.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -46,11 +47,54 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in bold are the parameters to be supplied by the user +
+e.g. in `add **n/NAME**`, `**NAME**` is a parameter which can be used as `add n/John Doe`.
+* Items in square brackets represent the possible options to specify e.g in this command format: +
+`add [patient/donor/doctor] n/**NAME**`, this means we can choose patient, donor, or doctor.
+* `[attributes]` refer to all the attributes in the <<List of Attributes>>.
+* Parameters can be in any order e.g. if the command specifies `n/**NAME** c/**CONTACT**`, `c/**CONTACT** n/**NAME**` +
+is also acceptable.
 ====
+=== List of attributes
+
+* n/**NAME**: the name of the person
+** Applicable to: patients, doctors, donors
+** Valid input: alphabets
+
+* g/**GENDER** - the gender of the person
+** Applicable to: patients and donors
+** Valid input: M/F
+
+* b/**BLOODTYPE** - the blood type of the person
+** Applicable to: patients and donors
+** Valid input: A/B/AB/O
+
+* p/**PRIORITY** - priority level of patients
+** Applicable to: patients
+** Valid input: high/low/medium
+
+* c/**CONTACT** - contact number of a person
+** Applicable to: patients, doctors, donors
+** Valid input: 9 digit number sequence, starting with 6, 8 or 9
+
+* id/**NRIC** - NRIC number of a person
+** Applicable to: patients, doctors and donors
+** Valid input:
+
+* a/**AGE** - age of a person
+** Applicable to: patients and donors
+** Valid input:
+
+* d/**DOCTOR** - doctor in charge of a patient
+** Applicable to: patients
+
+
+* exp/**EXPIRY** - expiry date of a donor's organ
+** Applicable to: donors
+
+* ext/**EXTENSION NUMBER** - extension number of a doctor
+** Applicable to: doctors
+** Valid input:
 
 === Viewing help : `help`
 
@@ -58,88 +102,155 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a patient, doctor, or donor to OTM with the attributes given, depending on what is specified.
+
+Format for adding patients: `add patient n/**NAME** g/**GENDER** b/**BLOODTYPE** p/**PRIORITY** c/**CONTACT** +
+id/**NRIC** d/**DOCTOR** a/**AGE**`
+
+Format for adding donors: `add donor n/**NAME** g/**GENDER** b/**BLOODTYPE** c/**CONTACT** +
+id/**NRIC** exp/**EXPIRY** a/**AGE**`
+
+Format for adding doctors: `add doctor n/**NAME** ext/**EXTENSION NUMBER** c/**CONTACT** +
+id/**NRIC**`
 
 [TIP]
-A person can have any number of tags (including 0)
+View <<List of attributes>> to find out what each attribute mean.
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add patient n/John Doe g/M p/high b/A a/29 id/S9988330G d/1234 c/98765432`
+* `add donor n/Betsy g/F c/99998888 b/AB p/1234567 exp/23/11/2020 a/21 id/S2345678H`
+* `add doctor ext/1234 c/91054444 id/S5678908D`
 
-=== Listing all persons : `list`
+**Form Mode**
 
-Shows a list of all persons in the address book. +
-Format: `list`
+Besides typing the command out in full to add a person, OTM allows for adding a person by filling in a form.
+
+Format: `add [patient/doctor/donor]`
+
+OTM will generate a form for the user to input the person's attributes.
+
+**Detecting duplicates**
+
+When adding a person, OTM will detect if the input is a duplicate of another person in the list.
+A duplicate is defined as: Two persons of the same type who have the same NRIC.
+
+When a duplicate is detected, OTM will indicate that there is such a person in OTM so the inputs
+should be changed.
+
+=== Listing persons : `list`
+
+Shows a list of all doctors, donors, or patients in OTM, depending on the type of person specified.
+Format: `list [patient/doctor/donor]`
+
+Examples:
+
+* `list patient`
+* `list doctor`
+* `list donor`
 
 === Editing a person : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing person's information. +
+Format: `edit [patient/doctor/donor] **INDEX** [attributes]`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the person at the specified `**INDEX**`. The index refers to the index number shown in the list of the +
+type of person (doctors/donors/patients). The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit patient 1 c/91234567` +
+Edits the phone number of the 1st patient to be `91234567`.
+* `edit donor 2 n/Betsy Crower b/A` +
+Edits the name and blood type of the 2nd donor to be `Betsy Crower` and `A` respectively.
 
 === Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds persons whose attributes contain any of the given keywords. +
+Format: `find [patient/donor/doctor] [attributes]`
+
+A list of patient/donor/doctor's information whose attributes partially match the keywords +
+will be displayed.
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). +
+e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find patient n/Lim` +
+Returns any patient whose name contains 'Lim'
+
 
 // tag::delete[]
 === Deleting a person : `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Deletes the specified person from OTM. +
+Format: `delete [patient/doctor/donor] **NRIC**`
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+Example:
 
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+`delete patient S98654322D` +
+Deletes a patient with the ID S98654322D in OTM.
 
 // end::delete[]
-=== Clearing all entries : `clear`
+=== Detecting matches: `match`
 
-Clears all entries from the address book. +
-Format: `clear`
+There are three types of matches:
+
+* Blood type match
+* Tissue match
+* Cross match
+
+Displays a list of potential matches between donors' and patients' kidneys.
+
+****
+* A patient and donor who does not pass all three tests will be listed as potential matches.
+* A patient and donor who passes all three tests will be listed as a match.
+* `match cross` will only run matches on patients and donors whose blood type and tissue matches.
+* For each match, the success rate will be computed according to all three test results.
+****
+
+Format: `match [blood/tissue/cross]`
+
+Example:
+
+`match blood`
+
+=== Sorting matches: `sort`
+
+After detecting matches, matches are stored in OTM.
+
+Matches can be sorted according to three categories:
+
+* Success rate
+* Priority, which is determined by:
+    ** Urgency: estimated days of survival of patient
+    ** Length of time a patient is waiting for organ
+* Date of expiry of donors' organs
+
+Format: `sort [rate/priority/expiry]`
+
+Example:
+
+`sort rate`
+
+=== Mark as done : `done`
+
+Indicates when a patient and donor completed a kidney transplant.
+
+Format: `done **INDEX**`
+****
+* `**INDEX**` represents the index of a match between a donor and a patient
+* Donors marked as done will not be considered for future matches with other patients
+* Patients marked as done will not be considered for future matches with other donors
+****
 
 === Exiting the program : `exit`
 
@@ -148,30 +259,83 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+== Future improvements
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+This section describes features that can be added or improved in v2.0.
+
+=== Processing a match: `match`
+
+Emails the doctor in charge of a patient when an organ match for the patient is found.
+
+Format: `process **NRIC**`
+
+=== Filtering persons: `filter`
+
+Filters a patient/doctor/donor by specific attributes.
+
+Format: `filter [patient/donor/doctor] [options]`
+
+Returns a list of patients/doctors/doctors that has the specified attributes.
+
+Examples:
+
+* `filter patient g/M`
+* `filter donor g/M n/Chua`
+
+
+=== Mass addition of data
+
+Add more than one patient/doctor/donor from data in a specified text file.
+
+A duplicate is defined as: two persons of the same type having the same ID.
+When a duplicate is detected, it prompts the user to change the data in the text file.
+
+=== Advanced find
+
+Finding in v2.0 is more advanced with the implementation of fuzzy search and partial matching of keywords.
+
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q*: How do I transfer my data to another computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous OTM folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
+* *Add* `add [patient/doctor/donor] n/**NAME** c/**CONTACT** g/**GENDER** p/**PRIORITY** nric/**NRIC** d/**DOCTOR**` +
+e.g. `add patient n/John Doe g/M p/high b/A a/29 nric/S9988330G d/1234 c/98765432`
+* *Delete* : `delete **INDEX**` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Edit* : `edit INDEX [attributes]` +
+e.g. `edit 2 n/James Lee `
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
+* *Match* : `match [blood/tissue/cross]` +
+e.g. `match blood`
+* *List* : `list [patient/donor/doctor]`
+* *Sort* : `sort [rate/priority/expiry]`
 * *Help* : `help`
+* *Done* : `done **INDEX**`
+* *Exit* : `exit`
+
+== Glossary
+
+* user: refers to hospital administration staff who are using this desktop application
+
+* person: refers to doctors, patients or donors
+
+* blood type match: refers to a donor and patient whose blood types are compatible.
+
+* tissue match: refers to a donor and patient whose tissues match
+
+* cross match: a trial blood transfusion, where donor and patient's blood are mixed in a test tube to check +
+for harmful interactions between patient and donor's blood
+
+* potential match: refers to a donor-patient pair whose organs pass at least one matching test
+
+* match: refers to a donor-patient pair whose organs pass all three matching tests
+
+* duplicate: refers to two persons of the same type which have the same NRIC

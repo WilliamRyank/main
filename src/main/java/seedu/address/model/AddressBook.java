@@ -40,11 +40,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code people}.
-     * {@code people} must not contain duplicate people.
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> people) {
-        this.persons.setPersons(people);
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
     }
 
     /**
@@ -77,8 +77,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person
-     * in the address book.
+     * The identity of {@code editedPerson} must not be the same as another existing {@code person}
+     * in the ORGANice Transplany Manager.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);

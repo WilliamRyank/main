@@ -10,7 +10,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 
 /**
- * A utility class for person.
+ * A utility class for Person.
  */
 public class PersonUtil {
 

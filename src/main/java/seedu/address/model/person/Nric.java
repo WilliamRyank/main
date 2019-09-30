@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
 
-    public static final String MESSAGE_CONSTRAINTS = "Nric must be in the form [S/T/F/G][7-numbers][A-Z], "
-            + "and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Nric must start with a letter 'S/T/F/G', 7 numbers afterward "
+            + "and its must end with a letter";
 
     /*
      * The first character of the address must not be a whitespace,

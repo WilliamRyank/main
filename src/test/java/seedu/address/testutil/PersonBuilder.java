@@ -39,7 +39,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Type} of the {@code person} that we are building.
+     * Sets the {@code Type} of the {@code Person} that we are building.
      */
     public PersonBuilder withType(String type) {
         this.type = new Type(type);
@@ -47,7 +47,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Nric} of the {@code person} that we are building.
+     * Sets the {@code Nric} of the {@code Person} that we are building.
      */
     public PersonBuilder withNric(String nric) {
         this.nric = new Nric(nric);
@@ -55,7 +55,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code person} that we are building.
+     * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
@@ -63,7 +63,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code person} that we are building.
+     * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
         this.phone = new Phone(phone);

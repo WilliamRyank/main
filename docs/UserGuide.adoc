@@ -50,6 +50,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Refer to <<Features>> for details of each command.
 
+
 [[Features]]
 == Features
 
@@ -57,27 +58,31 @@ The following section describes the list of features and commands
 in this application. +
  +
 
-The list below describes the format of the commands:
+The list below how the format of the commands should be interpreted:
 
 ====
 *Command Format*
 
+* The first word in a command is the command word. The rest of the words are parameters, which
+are either compulsory or optional. +
+e.g. in a command `add n/**NAME** p/**PHONE**`, `add` is the command word while `n/**NAME** p/**PHONE**`
+are parameters.
 * Words in bold are the parameters to be supplied by the user +
 e.g. in `add **n/NAME**`, `**NAME**` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets represent optional parameters to specify e.g in this command format: +
-`add [pa n/**NAME**`, this means we can choose patient, donor, or doctor.
 * `[attributes]` refer to all the attributes in the <<List of Attributes>>.
 * Parameters can be in any order +
 e.g. if the command specifies `n/**NAME** p/**PHONE**`, `p/**PHONE** n/**NAME**`
 is also acceptable.
 ====
+
 === List of attributes
 
-In this application, a person's data is represented by attributes. Attributes +
+In this application, a person's data is represented by attributes. Attributes
 refer to personal particulars such as name, type of person and blood type. +
-The following list shows the list of attributes that can be specified for +
-a person and the criteria for valid inputs.
 
+
+The following list shows the list of attributes that can be specified for
+a person and the criteria for valid inputs:
 
 * n/**NAME**: the name of the person
 ** Applicable to: patients, doctors, donors
@@ -90,10 +95,6 @@ a person and the criteria for valid inputs.
 * o/**ORGAN**: the type of organs
 ** Applicable to: patients, donors
 ** Valid input: kidney
-
-* g/**GENDER** - the gender of the person
-** Applicable to: patients and donors
-** Valid input: M/F
 
 * b/**BLOODTYPE** - the blood type of the person
 ** Applicable to: patients and donors
@@ -110,13 +111,17 @@ a person and the criteria for valid inputs.
 *** followed by a 7 digit number sequence
 *** ends with a capital letter
 
+* pr/**PRIORITY** - priority of the patient, the value of which is determined by a doctor
+** Applicable to: patients
+** Valid input: high/medium/low
+
 * a/**AGE** - age of a person
 ** Applicable to: patients and donors
-** Valid input: [TBC]
+** Valid input: a number
 
 * d/**DOCTOR** - doctor in charge of a patient
 ** Applicable to: patients
-** Valid input: NRIC of the doctor [TBC]
+** Valid input: NRIC of the doctor
 
 * tt/**TISSUE TYPE** - the type of tissues
 ** Applicable to: patients and donors
@@ -124,11 +129,7 @@ a person and the criteria for valid inputs.
 
 * exp/**EXPIRY** - expiry date of a donor's organ
 ** Applicable to: donors
-** Valid input: a valid date
-
-* ext/**EXTENSION NUMBER** - extension number of a doctor [TBC]
-** Applicable to: doctors
-** Valid input: a valid number
+** Valid input: a valid date in DD-MMM-YYYY format
 
 === Viewing help : `help`
 
@@ -138,39 +139,52 @@ Format: `help`
 
 Adds a patient, doctor, or donor to OTM with the attributes given, depending on what is specified.
 
-Format for adding patients: `add t/patient n/**NAME** g/**GENDER** o/**ORGAN** b/**BLOODTYPE** tissue/**TISSUE** +
-p/**PHONE** ic/**NRIC** d/**DOCTOR** a/**AGE**`
+There are two ways to add a person:
+* Normal Add
+* Add with system prompting
 
-Format for adding donors: `add t/donor n/**NAME** g/**GENDER** o/**ORGAN** b/**BLOODTYPE** tissue/**TISSUE** +
-p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`
+==== Normal Add
 
-Format for adding doctors: `add t/doctor n/**NAME** ext/**EXTENSION NUMBER** p/**PHONE** +
-ic/**NRIC**`
+Normal add refers to specifying all the attributes in the command. To add, type in the following
+commands to add a person:
+
+Format for adding patients: `add t/patient n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
+p/**PHONE** pr/**PRIORITY** ic/**NRIC** d/**DOCTOR** a/**AGE**` +
+
+Format for adding donors: `add t/donor n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
+p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**` +
+
+Format for adding doctors: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE** ic/**NRIC**`
+
+After adding a person, OTM will display a form which contains the attributes of the person. Press
+the Enter key to confirm the details.
 
 [TIP]
 View <<List of attributes>> to find out what each attribute mean.
 
 Examples:
 
-* `add t/patient n/John Doe g/M p/high b/A a/29 ic/S9988330G d/1234 p/98765432`
-* `add t/donor n/Betsy g/F p/99998888 b/AB p/1234567 exp/23/11/2020 a/21 ic/S2345678H`
-* `add t/doctor ext/1234 p/91054444 ic/S5678908D`
+* `add t/patient n/John Doe o/kidney b/A tt/1,2,3,4,5,6 p/98765432 pr/high ic/S9988330G
+d/S2235456D a/29`
+* `add t/donor n/Betsy Kim o/kidney b/AB tt/2,5,7,8,9,10 p/99998888 ic/S2345678H
+exp/23-Nov-2020 a/21`
+* `add t/doctor n/Lim Chu Kang p/91054444 ic/S5678908D`
 
-**Form Mode**
+==== Add with system prompting
 
-Besides typing the command out in full to add a person, OTM allows for adding a person by filling in a form.
+In this mode, the user can add the person's attributes one by one.
+After entering an attribute, the system will prompt the user input for another attribute.
 
 Format: `add t/**TYPE**`
 
-OTM will generate a form for the user to input the person's attributes.
+OTM will prompt the user to type in each attribute, one by one.
 
-**Detecting duplicates**
+In the display box, there will be a form that reflects the attributes typed by the user.
 
-When adding a person, OTM will detect if the input is a duplicate of another person in the list.
-A duplicate is defined as: Two persons of the same type who have the same NRIC.
+After the inputs are added, OTM will display a template that shows what the user data will look like
+if the changes are finalised. Press the Enter key to confirm the changes.
 
-When a duplicate is detected, OTM will indicate that there is such a person in OTM so the inputs
-should be changed.
+
 
 === Listing persons : `list`
 
@@ -185,34 +199,35 @@ Examples:
 
 === Editing a person : `edit`
 
-Edits an existing person's information. +
+Edits the information of the person with the specified NRIC to the attributes specified.
+It is up to the user to specify which attributes should be updated. +
 Format: `edit t/**TYPE** ic/**NRIC** [attributes]`
 
-****
-* Edits the person at the specified `**NRIC**`.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-****
+
+After editing, OTM will display a form to show what information will be stored about
+the person after confirming the changes. The user is free to edit the fields before
+changes are confirmed.
 
 Examples:
 
-* `edit patient ic/S8732457G p/91234567` +
+* `edit t/patient ic/S8732457G p/91234567` +
 Edits the phone number of the specified patient to be `91234567`.
-* `edit donor ic/S8732457G n/Betsy Crower b/A` +
+* `edit t/donor ic/S8732457G n/Betsy Crower b/A` +
 Edits the name and blood type of the specified donor to be `Betsy Crower` and `A` respectively.
 
 === Locating persons by name: `find`
 
-Finds persons whose attributes contain any of the given keywords. +
-Format: `find t/**TYPE** [attributes]`
-
+Finds persons whose attributes contain any of the given keywords.
 A list of patient/donor/doctor's information whose attributes partially match the keywords
-will be displayed.
+will be displayed. +
+Format: `find [attributes]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). +
-e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one attribute will be returned. +
+e.g. `a/28 n/Hans Bo` will return people whose attributes are `n/Hans Gruber`, `n/Bo Yang`,
+`a/28 n/Jane`
+
 ****
 
 Examples:
@@ -224,70 +239,113 @@ Returns any patient whose name contains 'Lim'
 // tag::delete[]
 === Deleting a person : `delete`
 
-Deletes the specified person from OTM. +
+Deletes the specified person from OTM.
+Match history of a deleted patient or donor with other patients/donors will be removed. +
 Format: `delete t/**TYPE** ic/**NRIC**`
 
 Example:
 
 `delete t/patient ic/S98654322D` +
+
 Deletes a patient with the NRIC S98654322D in OTM.
+
 
 // end::delete[]
 === Detecting matches: `match`
 
-Currently, OTM only supports kidney matching. There are three types of tests to determine kidney matches:
+Currently, OTM only supports kidney matching. Refer to <<FAQ>> to know the
+procedure for kidney matching.
 
-* Blood type match
-* Tissue match
-* Cross match
+This command displays a list of patient-donor pairs that passes both the blood type and tissue
+typing tests. +
 
-Displays a list of patient-donor pairs that passes the blood type and tissue typing match. +
+To get a list of patients and their number of matches, the format is: `match all/`
+
+To get a list of potential matches a patient has with a donor, the format is: `match ic/**NRIC**`
+
+Each match is accompanied by a success rate number,
+which indicates the degree of compatibility
+between the patient and donor. +
 This is so that the doctors can schedule for cross matching between the patient-donor pair.
 
-****
-* Only patient-donor pairs who passes all three tests will be listed as a match.
-* `match` will only run matches on patients and donors whose blood type and tissue matches.
-* For each match, the success rate will be computed according to all three test results.
-****
+Matches can be sorted. Refer to <<Sorting matches>> for more information.
 
-To get a list of potential matches, format: `match` +
-To get a list of potential matches for a specific individual, format: `match ic/**NRIC**`
-
-Example:
-
-`match blood`
-
-=== Sorting matches: `sort`
-
-After detecting matches, matches are stored in OTM.
+=== Sorting matches
+Users can specify how they want the patient-donor pairs to be sorted. +
+Sorting is done by passing in optional parameters to the `match` command. +
 
 Matches can be sorted according to three categories:
 
-* Success rate
-* Priority, which is determined by:
-    ** Urgency: estimated days of survival of patient
-    ** Length of time a patient is waiting for organ
-* Date of expiry of donors' organs
+1. Success rate of match
+2. Priority of patient
+3. Date of expiry of donors' organs
+
+To return a sorted list of patient-donor pairs, include the `sort/` flag in the command. +
+Format:
+`match ic/**NRIC** sort/[rate/priority/expiry]`
 
 Typing this command causes the application to display a list of matches sorted
-according to the specified criteria.
+according to the specified criteria. More than one sorting criteria can be included.
 
-Format: `sort [rate/priority/expiry]`
+Examples:
+
+* `match ic/S7778983D sort/rate`
+* `match ic/S7778983D sort/rate, priority, expiry`
+
+
+=== Processing potential matches: `processing`
+//TODO: change to shorter term that captures the meaning
+
+After finding a list of matches, the hospital is free to schedule a cross-matching test between
+a specific donor and patient. +
+
+After typing this command, the following changes occur:
+
+* the patient and donor statuses will be set to 'under cross matching'
+* the patient and donor will not be included in matching with other donor and patients until a status update.
+
+Format: `processing icP/**PATIENT NRIC** icD/**DONOR NRIC**` +
 
 Example:
+`processing icP/S6764235G icD/S1234567D`
 
-`sort rate`
 
 === Mark as done : `done`
 
-Indicates when a patient and donor completed a kidney transplant.
+After the hospital has the results of the cross matching test, they can
+update the results in OTM. Cross matching tests have two possible results: pass or fail.
 
-Format: `done ic/**NRIC**`
-****
-* `**NRIC**`
-* Donors marked as done will not be considered for future matches with other patients
-* Patients marked as done will not be considered for future matches with other donors
-****
+Format: `done icP/**NRIC OF PATIENT** icD/**NRIC OF DONOR** res/[pass/fail]`
+
+`icP/**NRIC OF PATIENT**` refers to the NRIC of the patient, while icD/**NRIC OF DONOR**
+refers to the NRIC of the donor.
+
+The following section outlines what happens based on the two results: +
+
+If the result of the cross matching is a 'pass':
+
+. It is up to the hospital staff to schedule an organ transplant surgery
+between the patient and donor.
+. Mark the patient and donor as 'done', based on the command format.
+. After running the command, the system removes the patient and donor from the matching pool.
+The patient and donor statuses will be marked to 'done'.
+
+
+If the result of the cross matching is a 'fail': +
+
+. Run the command based on the given format
+
+. The patient and donor will be added back to the matching pool for
+match detection with other patients and donors.
+
+. The patient-donor pair will not be considered a potential match in future match detection.
+
+
+Example:
+
+* `done icP/S7896432A icD/S4578902G res/pass`
+* `done icP/S7896432A icD/S4578902G res/fail`
+
 
 === Exiting the program : `exit`
 
@@ -298,6 +356,14 @@ Format: `exit`
 
 Data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+=== Detecting duplicates
+
+When adding a person, OTM will detect if the input is a duplicate of another person in the list.
+A duplicate is defined as: Two persons of the same type who have the same NRIC.
+
+When a duplicate is detected, OTM will indicate that there is such a person in OTM so the inputs
+should be changed.
 
 == Future improvements
 

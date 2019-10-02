@@ -201,8 +201,9 @@ Examples:
 
 Edits the information of the person with the specified NRIC to the attributes specified.
 It is up to the user to specify which attributes should be updated. +
-Format: `edit t/**TYPE** ic/**NRIC** [attributes]`
 
+Format: `edit t/**TYPE** ic/**NRIC**`
+Optional parameters: any parameter from the <<List of Attributes>>
 
 After editing, OTM will display a form to show what information will be stored about
 the person after confirming the changes. The user is free to edit the fields before
@@ -220,7 +221,10 @@ Edits the name and blood type of the specified donor to be `Betsy Crower` and `A
 Finds persons whose attributes contain any of the given keywords.
 A list of patient/donor/doctor's information whose attributes partially match the keywords
 will be displayed. +
-Format: `find [attributes]`
+
+Format: `find` +
+Optional parameters: any parameter from <<List of Attributes>>
+
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -317,7 +321,7 @@ update the results in OTM. Cross matching tests have two possible results: pass 
 
 Format: `done icP/**NRIC OF PATIENT** icD/**NRIC OF DONOR** res/[pass/fail]`
 
-`icP/**NRIC OF PATIENT**` refers to the NRIC of the patient, while icD/**NRIC OF DONOR**
+`icP/**NRIC OF PATIENT**` refers to the NRIC of the patient, while `icD/**NRIC OF DONOR**`
 refers to the NRIC of the donor.
 
 The following section outlines what happens based on the two results: +
@@ -432,20 +436,25 @@ that contains the data of your previous OTM folder.
 This section summarises the commands to use this application. The following list
 contains the summary of the commands.
 
-* *Add* `add t/**TYPE** n/**NAME** p/**PHONE** g/**GENDER** ic/**NRIC** d/**DOCTOR**` +
-e.g. `add patient n/John Doe g/M p/high b/A a/29 ic/S9988330G d/1234 /98765432`
-* *Delete* : `delete **INDEX**` +
-e.g. `delete 3`
-* *Edit* : `edit ic/**NRIC** [attributes]` +
-e.g. `edit ic/S7896428G n/James Lee `
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *Match* : `match [blood/tissue/cross]` +
-e.g. `match blood`
+* *Add (Normal Mode)*
+** Add patient: `add t/patient n/NAME o/ORGAN b/BLOOD TYPE tt/TISSUE TYPE p/PHONE pr/PRIORITY ic/NRIC d/DOCTOR a/AGE`
+** Add donor: `add t/donor n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
+p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`
+** Add doctor: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE** ic/**NRIC**`
+
+* *Add (System Prompt Mode)*: `add t/**TYPE**`
+
+* *Delete* : `delete t/**TYPE** ic/**NRIC**` +
+* *Edit* : `edit t/**TYPE** ic/**NRIC**`
+** Optional parameters: any parameter from <<List of Attributes>>
+* *Find* : `find`
+** Optional parameters: any parameter from <<List of Attributes>>
+* *Match* : `match [all/ic]`
+** Optional parameters: `sort/[rate/expiry/priority]` +
+* *Processing*: `processing icP/**NRIC of Patient** icD/**NRIC OF DONOR**`
 * *List* : `list t/**TYPE**`
-* *Sort* : `sort [rate/priority/expiry]`
 * *Help* : `help`
-* *Done* : `done **INDEX**`
+* *Done* : `done icP/**NRIC of Patient** icD/**NRIC OF DONOR** `
 * *Exit* : `exit`
 
 == Glossary

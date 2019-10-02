@@ -15,7 +15,7 @@ endif::[]
 :repoURL: https://github.com/AY1920S1-CS2103T-T13-1/main
 :javaURL: https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
 
-By: `CS2013T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
+By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
 == Introduction
 
@@ -102,7 +102,7 @@ a person and the criteria for valid inputs:
 
 * p/**PHONE** - contact number of a person
 ** Applicable to: patients, doctors, donors
-** Valid input: 9 digit number sequence, starting with 6, 8 or 9
+** Valid input: 8 digit number sequence, starting with 6, 8 or 9
 
 * ic/**NRIC** - NRIC number of a person
 ** Applicable to: patients, doctors and donors
@@ -140,6 +140,7 @@ Format: `help`
 Adds a patient, doctor, or donor to OTM with the attributes given, depending on what is specified.
 
 There are two ways to add a person:
+
 * Normal Add
 * Add with system prompting
 
@@ -193,9 +194,9 @@ Format: `list t/**TYPE**`
 
 Examples:
 
-* `list patient`
-* `list doctor`
-* `list donor`
+* `list t/patient`
+* `list t/doctor`
+* `list t/donor`
 
 === Editing a person : `edit`
 
@@ -436,7 +437,7 @@ that contains the data of your previous OTM folder.
 This section summarises the commands to use this application. The following list
 contains the summary of the commands.
 
-* *Add (Normal Mode)*
+* *Add (Normal Mode):*
 ** Add patient: `add t/patient n/NAME o/ORGAN b/BLOOD TYPE tt/TISSUE TYPE p/PHONE pr/PRIORITY ic/NRIC d/DOCTOR a/AGE`
 ** Add donor: `add t/donor n/**NAME** o/**ORGAN** b/**BLOOD TYPE** tt/**TISSUE TYPE**
 p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`

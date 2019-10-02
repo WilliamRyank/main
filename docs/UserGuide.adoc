@@ -75,7 +75,8 @@ e.g. if the command specifies `n/**NAME** p/**PHONE**`, `p/**PHONE** n/**NAME**`
 is also acceptable.
 ====
 
-=== List of attributes
+
+=== List of Attributes
 
 In this application, a person's data is represented by attributes. Attributes
 refer to personal particulars such as name, type of person and blood type. +
@@ -161,7 +162,7 @@ After adding a person, ORGANice will display a form which contains the attribute
 the Enter key to confirm the details.
 
 [TIP]
-View <<List of attributes>> to find out what each attribute mean.
+View <<List of Attributes>> to find out what each attribute mean.
 
 Examples:
 

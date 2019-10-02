@@ -1,4 +1,4 @@
-= ORGANice Transplant Manager - User Guide
+= ORGANice - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -19,17 +19,17 @@ By: `CS2103T-T13-1`      Since: `Sep 2019`      Licence: `MIT`
 
 == Introduction
 
-ORGANice Transplant Manager (OTM) is a desktop application for hospital administration staff +
+ORGANice is a desktop application for hospital administration staff +
 to manage organ transplants.
-With OTM, you can easily do the following:
+With ORGANice, you can easily do the following:
 
 * organise information about patients, doctors, and donors
 * find matches between organ donors and patients
 
 
-OTM is *optimized for those who prefer to work with a Command Line Interface* (CLI) +
+ORGANice is *optimized for those who prefer to work with a Command Line Interface* (CLI) +
 while still having the benefits of a Graphical User Interface (GUI). If you can type fast, +
-OTM can get your administration tasks done faster than traditional GUI apps. Interested? +
+ORGANice can get your administration tasks done faster than traditional GUI apps. Interested? +
 Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
@@ -137,7 +137,7 @@ Format: `help`
 
 === Adding a person: `add`
 
-Adds a patient, doctor, or donor to OTM with the attributes given, depending on what is specified.
+Adds a patient, doctor, or donor to ORGANice with the attributes given, depending on what is specified.
 
 There are two ways to add a person:
 
@@ -157,7 +157,7 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**` +
 
 Format for adding doctors: `add t/doctor n/**NAME** ic/**NRIC** p/**PHONE** ic/**NRIC**`
 
-After adding a person, OTM will display a form which contains the attributes of the person. Press
+After adding a person, ORGANice will display a form which contains the attributes of the person. Press
 the Enter key to confirm the details.
 
 [TIP]
@@ -178,18 +178,18 @@ After entering an attribute, the system will prompt the user input for another a
 
 Format: `add t/**TYPE**`
 
-OTM will prompt the user to type in each attribute, one by one.
+ORGANice will prompt the user to type in each attribute, one by one.
 
 In the display box, there will be a form that reflects the attributes typed by the user.
 
-After the inputs are added, OTM will display a template that shows what the user data will look like
+After the inputs are added, ORGANice will display a template that shows what the user data will look like
 if the changes are finalised. Press the Enter key to confirm the changes.
 
 
 
 === Listing persons : `list`
 
-Shows a list of all doctors, donors, or patients in OTM, depending on the type of person specified.
+Shows a list of all doctors, donors, or patients in ORGANice, depending on the type of person specified.
 Format: `list t/**TYPE**`
 
 Examples:
@@ -203,18 +203,18 @@ Examples:
 Edits the information of the person with the specified NRIC to the attributes specified.
 It is up to the user to specify which attributes should be updated. +
 
-Format: `edit t/**TYPE** ic/**NRIC**`
+Format: `edit ic/**NRIC**`
 Optional parameters: any parameter from the <<List of Attributes>>
 
-After editing, OTM will display a form to show what information will be stored about
+After editing, ORGANice will display a form to show what information will be stored about
 the person after confirming the changes. The user is free to edit the fields before
 changes are confirmed.
 
 Examples:
 
-* `edit t/patient ic/S8732457G p/91234567` +
+* `edit ic/S8732457G p/91234567` +
 Edits the phone number of the specified patient to be `91234567`.
-* `edit t/donor ic/S8732457G n/Betsy Crower b/A` +
+* `edit ic/S8732457G n/Betsy Crower b/A` +
 Edits the name and blood type of the specified donor to be `Betsy Crower` and `A` respectively.
 
 === Locating persons by name: `find`
@@ -244,21 +244,21 @@ Returns any patient whose name contains 'Lim'
 // tag::delete[]
 === Deleting a person : `delete`
 
-Deletes the specified person from OTM.
+Deletes the specified person from ORGANice.
 Match history of a deleted patient or donor with other patients/donors will be removed. +
-Format: `delete t/**TYPE** ic/**NRIC**`
+Format: `delete ic/**NRIC**`
 
 Example:
 
-`delete t/patient ic/S98654322D` +
+`delete ic/S98654322D` +
 
-Deletes a patient with the NRIC S98654322D in OTM.
+Deletes a person with the NRIC S98654322D in ORGANice.
 
 
 // end::delete[]
 === Detecting matches: `match`
 
-Currently, OTM only supports kidney matching. Refer to <<FAQ>> to know the
+Currently, ORGANice only supports kidney matching. Refer to <<FAQ>> to know the
 procedure for kidney matching.
 
 This command displays a list of patient-donor pairs that passes both the blood type and tissue
@@ -318,7 +318,7 @@ Example:
 === Mark as done : `done`
 
 After the hospital has the results of the cross matching test, they can
-update the results in OTM. Cross matching tests have two possible results: pass or fail.
+update the results in ORGANice. Cross matching tests have two possible results: pass or fail.
 
 Format: `done icP/**NRIC OF PATIENT** icD/**NRIC OF DONOR** res/[pass/fail]`
 
@@ -364,10 +364,10 @@ There is no need to save manually.
 
 === Detecting duplicates
 
-When adding a person, OTM will detect if the input is a duplicate of another person in the list.
+When adding a person, ORGANice will detect if the input is a duplicate of another person in the list.
 A duplicate is defined as: Two persons of the same type who have the same NRIC.
 
-When a duplicate is detected, OTM will indicate that there is such a person in OTM so the inputs
+When a duplicate is detected, ORGANice will indicate that there is such a person in ORGANice so the inputs
 should be changed.
 
 == Future improvements
@@ -377,7 +377,7 @@ It is further divided into two sub-sections: **Proposed New Features** and **Pro
 
 === Proposed New Features
 
-This section describes features that can be added to OTM in version 2.0.
+This section describes features that can be added to ORGANice in version 2.0.
 
 ==== Filtering persons: `filter`
 
@@ -405,7 +405,7 @@ When a duplicate is detected, it prompts the user to change the data in the text
 
 ==== Supporting more types of transplants
 
-Currently OTM has patient-donor matching for kidneys only. Future versions can include matching for +
+Currently ORGANice has patient-donor matching for kidneys only. Future versions can include matching for +
 more types of organs.
 
 ==== Processing a match: `process`
@@ -423,7 +423,7 @@ Finding in v2.0 is more advanced with the implementation of fuzzy search and par
 
 *Q*: How do I transfer my data to another computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file +
-that contains the data of your previous OTM folder.
+that contains the data of your previous ORGANice folder.
 
 *Q*: What are the steps to find a patient-donor kidney match? +
 *A*: There are three steps to finding a patient-donor match:
@@ -445,8 +445,8 @@ p/**PHONE** ic/**NRIC** exp/**EXPIRY** a/**AGE**`
 
 * *Add (System Prompt Mode)*: `add t/**TYPE**`
 
-* *Delete* : `delete t/**TYPE** ic/**NRIC**` +
-* *Edit* : `edit t/**TYPE** ic/**NRIC**`
+* *Delete* : `delete ic/**NRIC**` +
+* *Edit* : `edit ic/**NRIC**`
 ** Optional parameters: any parameter from <<List of Attributes>>
 * *Find* : `find`
 ** Optional parameters: any parameter from <<List of Attributes>>

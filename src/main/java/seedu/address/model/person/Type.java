@@ -40,6 +40,30 @@ public class Type {
                         || test.toLowerCase().equals("doctor"));
     }
 
+    /**
+     * Checks if the {@code Type} is a patient.
+     * @return boolean if this Type is a patient
+     */
+    public boolean isPatient() {
+        return value.equals("patient");
+    }
+
+    /**
+     * Checks if the {@code Type} is a donor.
+     * @return boolean if this Type is a donor
+     */
+    public boolean isDonor() {
+        return value.equals("donor");
+    }
+
+    /**
+     * Checks if the {@code Type} is a doctor.
+     * @return boolean if this Type is a doctor
+     */
+    public boolean isDoctor() {
+        return value.equals("doctor");
+    }
+
     @Override
     public String toString() {
         return value;

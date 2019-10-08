@@ -27,14 +27,12 @@ import seedu.address.model.person.Type;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Throws a ParseException if the type is not specified correctly in the input arguments.
-     * If the type is specified correctly, it returns the type.
+     * Returns the {@code Type} of person in the given {@code ArgumentMultimap}
+     * @throws ParseException if the type is not specified correctly in the input arguments
      */
     private static Type parseType(ArgumentMultimap argumentMultimap) throws ParseException {
-        Type type;
         try {
-            type = ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
-            return type;
+            return ParserUtil.parseType(argumentMultimap.getValue(PREFIX_TYPE).get());
         } catch (NoSuchElementException ex) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -99,7 +97,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Throws ParseException when one of the required prefixes for {@code Patient} are absent.
      */
     private static void arePrefixesPresentPatient(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -109,7 +107,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Throws ParseException when one of the required prefixes for Donor are absent.
      */
     private static void arePrefixesPresentDonor(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_AGE, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -119,7 +117,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Throws ParseException when one of the required prefixes for Doctor are absent.
      */
     private static void arePrefixesPresentDoctor(ArgumentMultimap argMultimap) throws ParseException {
-        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }

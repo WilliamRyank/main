@@ -11,14 +11,14 @@ public class Age {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain numbers, and it must be more than 0";
+            "Age should only be an integer more than 0 and less than 150.";
     //public static final String VALIDATION_REGEX = "[1-9]\\d*|0";
     public final String value;
 
     /**
      * Constructs a {@code Age}.
      *
-     * @param age A valid phone number.
+     * @param age A valid age.
      */
     public Age(String age) {
         requireNonNull(age);
@@ -32,7 +32,7 @@ public class Age {
     public static boolean isValidAge(String test) {
         try {
             Integer age = Integer.parseInt(test);
-            if (age >= 0 && age <= 150) {
+            if (age > 0 && age < 150) {
                 return true;
             } else {
                 return false;

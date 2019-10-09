@@ -12,7 +12,8 @@ public class Age {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Age should only be an integer more than 0 and less than 150.";
-    //public static final String VALIDATION_REGEX = "[1-9]\\d*|0";
+    public static final Integer AGE_MAX = 150;
+    public static final Integer AGE_MIN = 0;
     public final String value;
 
     /**
@@ -32,7 +33,7 @@ public class Age {
     public static boolean isValidAge(String test) {
         try {
             Integer age = Integer.parseInt(test);
-            if (age > 0 && age < 150) {
+            if (age > AGE_MIN && age < AGE_MAX) {
                 return true;
             } else {
                 return false;

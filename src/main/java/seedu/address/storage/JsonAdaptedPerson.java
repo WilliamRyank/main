@@ -27,7 +27,6 @@ class JsonAdaptedPerson {
     //Data fields of Patient
     protected final String age;
 
-
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */

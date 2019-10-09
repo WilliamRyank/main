@@ -31,6 +31,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_IRENE = "Irene";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
+
     public static final String VALID_PHONE_IRENE = "85355255";
     public static final String VALID_NRIC_AMY = "S1111111A";
     public static final String VALID_NRIC_BOB = "G2222222B";

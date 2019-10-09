@@ -139,7 +139,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, nric, type);
+            return CollectionUtil.isAnyNonNull(type, nric, name, phone);
         }
 
         public void setName(Name name) {
@@ -189,10 +189,10 @@ public class EditCommand extends Command {
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
+            return getType().equals(e.getType())
                     && getNric().equals(e.getNric())
-                    && getType().equals(e.getType());
+                    && getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone());
         }
     }
 }

@@ -1,22 +1,33 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+<<<<<<< HEAD
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+=======
+>>>>>>> 9566b24cb7c7db97eb1c0f1613de4f92ca2bb874
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
+<<<<<<< HEAD
 
 import java.util.NoSuchElementException;
+=======
+>>>>>>> 9566b24cb7c7db97eb1c0f1613de4f92ca2bb874
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+<<<<<<< HEAD
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Patient;
+=======
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
+>>>>>>> 9566b24cb7c7db97eb1c0f1613de4f92ca2bb874
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Type;
@@ -46,6 +57,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         //put all the prefixes in the multimap to tokenize.
         ArgumentMultimap argMultimap =
+<<<<<<< HEAD
                 ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_AGE, PREFIX_PHONE);
 
         Type type = parseType(argMultimap);
@@ -76,6 +88,21 @@ public class AddCommandParser implements Parser<AddCommand> {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
             Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+=======
+                ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE, PREFIX_NRIC, PREFIX_NAME, PREFIX_PHONE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        Type type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
+        Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+
+        Person person = new Person(type, nric, name, phone);
+>>>>>>> 9566b24cb7c7db97eb1c0f1613de4f92ca2bb874
 
             Person person = new Person(type, nric, name, phone);
             return new AddCommand(person);

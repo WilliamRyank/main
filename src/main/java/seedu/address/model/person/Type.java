@@ -18,6 +18,10 @@ public class Type {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
+    public static final String PATIENT = "patient";
+    public static final String DOCTOR = "doctor";
+    public static final String DONOR = "donor";
+
     public final String value;
 
     /**
@@ -36,8 +40,8 @@ public class Type {
      */
     public static boolean isValidType(String test) {
         return test.matches(VALIDATION_REGEX)
-                && (test.toLowerCase().equals("patient") || test.toLowerCase().equals("donor")
-                        || test.toLowerCase().equals("doctor"));
+                && (test.toLowerCase().equals(PATIENT) || test.toLowerCase().equals(DONOR)
+                        || test.toLowerCase().equals(DOCTOR));
     }
 
     /**
@@ -45,7 +49,7 @@ public class Type {
      * @return boolean if this Type is a patient
      */
     public boolean isPatient() {
-        return value.equals("patient");
+        return value.equals(PATIENT);
     }
 
     /**
@@ -53,7 +57,7 @@ public class Type {
      * @return boolean if this Type is a donor
      */
     public boolean isDonor() {
-        return value.equals("donor");
+        return value.equals(DONOR);
     }
 
     /**
@@ -61,7 +65,7 @@ public class Type {
      * @return boolean if this Type is a doctor
      */
     public boolean isDoctor() {
-        return value.equals("doctor");
+        return value.equals(DOCTOR);
     }
 
     @Override
